@@ -2,8 +2,17 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>DST</title>
+  <title>Widget Météo Cattenom</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FAVICONS & MANIFEST -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="DST Méteo" />
+  <link rel="manifest" href="/site.webmanifest" />
+
   <style>
     html, body {
       height: 100%;
@@ -63,7 +72,6 @@
       width: 100%;
     }
 
-    /* FOOTER CENTRÉ AVEC BOUTON i */
     .footer {
       width: 100%;
       height: 48px;
@@ -147,19 +155,16 @@
 
   <div class="spacer-footer"></div>
 
-  <!-- Footer centré avec bouton info -->
   <div class="footer">
     <span class="footer-text">Made with &lt;3 by Vicdst in Garche 🇫🇷</span>
     <div class="info-button" id="info-button">i</div>
   </div>
 
-  <!-- Infobulle d'information -->
   <div class="info-tooltip" id="info-tooltip">
     Les données météo sont issues d'une station installée, développée et maintenue à Garche par Vicdst.
   </div>
 
   <script>
-    // Heure arrondie au multiple de 5 minutes
     function getRoundedTime() {
       const now = new Date();
       const hours = now.getHours();
@@ -175,7 +180,6 @@
     updateMeteoTitle();
     setInterval(updateMeteoTitle, 60000);
 
-    // Widget météo
     !function(d,s,id){
       var js,fjs=d.getElementsByTagName(s)[0];
       if(!d.getElementById(id)){
@@ -186,7 +190,6 @@
       }
     }(document,'script','weatherwidget-io-js');
 
-    // Tooltip info
     const infoButton = document.getElementById('info-button');
     const infoTooltip = document.getElementById('info-tooltip');
 
