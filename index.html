@@ -1,195 +1,204 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Widget Météo Cattenom</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background: #ffca3a;
-        }
-        body {
-            min-height: 100vh;
-            background: #ffca3a;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .center-container {
-            flex: 1 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-        .meteo-title {
-            font-family: Arial Black, Arial, sans-serif;
-            font-weight: bold;
-            font-size: 1.6rem;
-            color: #583e1b;
-            margin-bottom: 18px;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-        .no-interaction {
-            width: 100%;
-            max-width: 600px;
-            min-width: 320px;
-            pointer-events: none;
-            user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-        .weatherwidget-io {
-            width: 100% !important;
-            min-width: 320px;
-            min-height: 250px;
-            display: block;
-        }
+  <meta charset="UTF-8">
+  <title>DST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #ffca3a;
+    }
 
-        .spacer-footer {
-            height: 60px;
-            width: 100%;
-        }
+    body {
+      min-height: 100vh;
+      background: #ffca3a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
 
-        /* Nouveau footer avec alignement */
-        .footer {
-            width: 100%;
-            background: #ffca3a;
-            padding: 12px 16px;
-            box-sizing: border-box;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Arial Black', Arial, sans-serif;
-            font-weight: bold;
-            color: #583e1b;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
+    .center-container {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
 
-        .info-button {
-            background: #583e1b;
-            color: #ffca3a;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            font-weight: bold;
-            font-family: Arial Black, Arial, sans-serif;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
+    .meteo-title {
+      font-family: Arial Black, Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.6rem;
+      color: #583e1b;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
 
-        .info-tooltip {
-            position: fixed;
-            bottom: 60px;
-            right: 16px;
-            background: #fff;
-            color: #583e1b;
-            border: 2px solid #583e1b;
-            border-radius: 12px;
-            padding: 10px 14px;
-            max-width: 240px;
-            font-size: 0.9rem;
-            font-family: Arial, sans-serif;
-            display: none;
-            z-index: 201;
-        }
-        .info-tooltip.active {
-            display: block;
-        }
-    </style>
+    .no-interaction {
+      width: 100%;
+      max-width: 600px;
+      min-width: 320px;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .weatherwidget-io {
+      width: 100% !important;
+      min-width: 320px;
+      min-height: 250px;
+      display: block;
+    }
+
+    .spacer-footer {
+      height: 60px;
+      width: 100%;
+    }
+
+    /* FOOTER CENTRÉ AVEC BOUTON i */
+    .footer {
+      width: 100%;
+      height: 48px;
+      background: #ffca3a;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #583e1b;
+      letter-spacing: 0.5px;
+      box-sizing: border-box;
+      padding: 0 48px;
+    }
+
+    .footer-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .info-button {
+      position: absolute;
+      right: 16px;
+      background: #583e1b;
+      color: #ffca3a;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-family: Arial Black, Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .info-tooltip {
+      position: fixed;
+      bottom: 60px;
+      right: 16px;
+      background: #fff;
+      color: #583e1b;
+      border: 2px solid #583e1b;
+      border-radius: 12px;
+      padding: 10px 14px;
+      max-width: 240px;
+      font-size: 0.9rem;
+      font-family: Arial, sans-serif;
+      display: none;
+      z-index: 201;
+    }
+
+    .info-tooltip.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="center-container">
-        <div class="meteo-title" id="meteo-title">
-            Météo à Garche à --:--
-        </div>
-        <div class="no-interaction">
-            <a class="weatherwidget-io"
-               href="https://forecast7.com/fr/49d416d24/cattenom/"
-               data-font="Arial Black"
-               data-icons="Climacons Animated"
-               data-mode="Current"
-               data-days="3"
-               data-theme="orange">
-            </a>
-        </div>
+  <div class="center-container">
+    <div class="meteo-title" id="meteo-title">
+      Météo à Garche à --:--
     </div>
-
-    <div class="spacer-footer"></div>
-
-    <!-- Footer avec bouton info -->
-    <div class="footer">
-        <div class="footer-content">
-            <span>Made with &lt;3 by Vicdst in Garche 🇫🇷</span>
-            <div class="info-button" id="info-button">i</div>
-        </div>
+    <div class="no-interaction">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/fr/49d416d24/cattenom/"
+         data-font="Arial Black"
+         data-icons="Climacons Animated"
+         data-mode="Current"
+         data-days="3"
+         data-theme="orange">
+      </a>
     </div>
+  </div>
 
-    <!-- Infobulle -->
-    <div class="info-tooltip" id="info-tooltip">
-        Les données météo sont issues d'une station installée, développée et maintenue à Garche par Vicdst.
-    </div>
+  <div class="spacer-footer"></div>
 
-    <script>
-        // Heure arrondie
-        function getRoundedTime() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const roundedMinutes = Math.floor(minutes / 5) * 5;
-            return hours.toString().padStart(2, '0') + ':' + roundedMinutes.toString().padStart(2, '0');
-        }
+  <!-- Footer centré avec bouton info -->
+  <div class="footer">
+    <span class="footer-text">Made with &lt;3 by Vicdst in Garche 🇫🇷</span>
+    <div class="info-button" id="info-button">i</div>
+  </div>
 
-        function updateMeteoTitle() {
-            document.getElementById('meteo-title').textContent = 'Météo à Garche à ' + getRoundedTime();
-        }
+  <!-- Infobulle d'information -->
+  <div class="info-tooltip" id="info-tooltip">
+    Les données météo sont issues d'une station installée, développée et maintenue à Garche par Vicdst.
+  </div>
 
-        updateMeteoTitle();
-        setInterval(updateMeteoTitle, 60000);
+  <script>
+    // Heure arrondie au multiple de 5 minutes
+    function getRoundedTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const roundedMinutes = Math.floor(minutes / 5) * 5;
+      return hours.toString().padStart(2, '0') + ':' + roundedMinutes.toString().padStart(2, '0');
+    }
 
-        // Widget météo
-        !function(d,s,id){
-            var js,fjs=d.getElementsByTagName(s)[0];
-            if(!d.getElementById(id)){
-                js=d.createElement(s);
-                js.id=id;
-                js.src='https://weatherwidget.io/js/widget.min.js';
-                fjs.parentNode.insertBefore(js,fjs);
-            }
-        }(document,'script','weatherwidget-io-js');
+    function updateMeteoTitle() {
+      document.getElementById('meteo-title').textContent = 'Météo à Garche à ' + getRoundedTime();
+    }
 
-        // Gestion de l’infobulle
-        const infoButton = document.getElementById('info-button');
-        const infoTooltip = document.getElementById('info-tooltip');
+    updateMeteoTitle();
+    setInterval(updateMeteoTitle, 60000);
 
-        infoButton.addEventListener('click', () => {
-            infoTooltip.classList.toggle('active');
-        });
+    // Widget météo
+    !function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src='https://weatherwidget.io/js/widget.min.js';
+        fjs.parentNode.insertBefore(js,fjs);
+      }
+    }(document,'script','weatherwidget-io-js');
 
-        // Clic hors de l’infobulle pour la fermer
-        document.addEventListener('click', (e) => {
-            if (!infoButton.contains(e.target) && !infoTooltip.contains(e.target)) {
-                infoTooltip.classList.remove('active');
-            }
-        });
-    </script>
+    // Tooltip info
+    const infoButton = document.getElementById('info-button');
+    const infoTooltip = document.getElementById('info-tooltip');
+
+    infoButton.addEventListener('click', () => {
+      infoTooltip.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!infoButton.contains(e.target) && !infoTooltip.contains(e.target)) {
+        infoTooltip.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
