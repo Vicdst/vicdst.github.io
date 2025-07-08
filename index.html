@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Widget Météo Cattenom</title>
+    <title>Widget Météo dst</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         html, body {
@@ -71,6 +71,44 @@
             height: 48px;
             width: 100%;
         }
+
+        /* Info Button + Tooltip */
+        .info-button {
+            position: fixed;
+            bottom: 60px;
+            right: 16px;
+            background: #583e1b;
+            color: #ffca3a;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-weight: bold;
+            font-family: Arial Black, Arial, sans-serif;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 200;
+        }
+        .info-tooltip {
+            position: fixed;
+            bottom: 100px;
+            right: 16px;
+            background: #fff;
+            color: #583e1b;
+            border: 2px solid #583e1b;
+            border-radius: 12px;
+            padding: 10px 14px;
+            max-width: 240px;
+            font-size: 0.9rem;
+            font-family: Arial, sans-serif;
+            display: none;
+            z-index: 201;
+        }
+        .info-tooltip.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -89,10 +127,18 @@
             </a>
         </div>
     </div>
+
     <div class="spacer-footer"></div>
     <div class="footer">
         Made with &lt;3 by Vicdst in Garche 🇫🇷
     </div>
+
+    <!-- Info Button -->
+    <div class="info-button" id="info-button">i</div>
+    <div class="info-tooltip" id="info-tooltip">
+        Les données météo sont issues d'une station installée, développée et maintenue à Garche par Vicdst.
+    </div>
+
     <script>
     // Calcul de l'heure arrondie au multiple de 5 minutes inférieur
     function getRoundedTime() {
@@ -100,11 +146,11 @@
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const roundedMinutes = Math.floor(minutes / 5) * 5;
-        // Formatage avec zéro devant si besoin
         const hStr = hours.toString().padStart(2, '0');
         const mStr = roundedMinutes.toString().padStart(2, '0');
         return hStr + ':' + mStr;
     }
+
     // Affichage dynamique de l'heure
     function updateMeteoTitle() {
         document.getElementById('meteo-title').textContent = 'Météo à Garche à ' + getRoundedTime();
@@ -122,6 +168,13 @@
             fjs.parentNode.insertBefore(js,fjs);
         }
     }(document,'script','weatherwidget-io-js');
+
+    // Info Tooltip Toggle
+    const infoButton = document.getElementById('info-button');
+    const infoTooltip = document.getElementById('info-tooltip');
+    infoButton.addEventListener('click', () => {
+        infoTooltip.classList.toggle('active');
+    });
     </script>
 </body>
 </html>
