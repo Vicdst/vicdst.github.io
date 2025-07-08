@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Widget Météo Cattenom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #ffca3a;
+        }
+        body {
+            min-height: 100vh;
+            background: #ffca3a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .center-container {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .meteo-title {
+            font-family: Arial Black, Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1.6rem;
+            color: #583e1b;
+            margin-bottom: 18px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .no-interaction {
+            width: 100%;
+            max-width: 600px;
+            min-width: 320px;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+        .weatherwidget-io {
+            width: 100% !important;
+            min-width: 320px;
+            min-height: 250px;
+            display: block;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            color: #583e1b;
+            font-size: 1rem;
+            padding: 18px 0 12px 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background: #ffca3a;
+            z-index: 100;
+            letter-spacing: 0.5px;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-weight: bold;
+        }
+        .spacer-footer {
+            height: 48px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-container">
+        <div class="meteo-title" id="meteo-title">
+            Météo à Garche à --:--
+        </div>
+        <div class="no-interaction">
+            <a class="weatherwidget-io"
+                href="https://forecast7.com/fr/49d416d24/cattenom/"
+                data-font="Arial Black"
+                data-icons="Climacons Animated"
+                data-mode="Current"
+                data-days="3"
+                data-theme="orange">
+            </a>
+        </div>
+    </div>
+    <div class="spacer-footer"></div>
+    <div class="footer">
+        Made with &lt;3 by Vicdst in Garche 🇫🇷
+    </div>
+    <script>
+    // Calcul de l'heure arrondie au multiple de 5 minutes inférieur
+    function getRoundedTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const roundedMinutes = Math.floor(minutes / 5) * 5;
+        // Formatage avec zéro devant si besoin
+        const hStr = hours.toString().padStart(2, '0');
+        const mStr = roundedMinutes.toString().padStart(2, '0');
+        return hStr + ':' + mStr;
+    }
+    // Affichage dynamique de l'heure
+    function updateMeteoTitle() {
+        document.getElementById('meteo-title').textContent = 'Météo à Garche à ' + getRoundedTime();
+    }
+    updateMeteoTitle();
+    setInterval(updateMeteoTitle, 60 * 1000);
+
+    // Widget météo
+    !function(d,s,id){
+        var js,fjs=d.getElementsByTagName(s)[0];
+        if(!d.getElementById(id)){
+            js=d.createElement(s);
+            js.id=id;
+            js.src='https://weatherwidget.io/js/widget.min.js';
+            fjs.parentNode.insertBefore(js,fjs);
+        }
+    }(document,'script','weatherwidget-io-js');
+    </script>
+</body>
+</html>
