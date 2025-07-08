@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Widget Météo dst</title>
+    <title>Widget Météo Cattenom</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         html, body {
@@ -52,36 +52,40 @@
             min-height: 250px;
             display: block;
         }
-        .footer {
-            width: 100%;
-            text-align: center;
-            color: #583e1b;
-            font-size: 1rem;
-            padding: 18px 0 12px 0;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            background: #ffca3a;
-            z-index: 100;
-            letter-spacing: 0.5px;
-            font-family: 'Arial Black', Arial, sans-serif;
-            font-weight: bold;
-        }
+
         .spacer-footer {
-            height: 48px;
+            height: 60px;
             width: 100%;
         }
 
-        /* Info Button + Tooltip */
-        .info-button {
+        /* Nouveau footer avec alignement */
+        .footer {
+            width: 100%;
+            background: #ffca3a;
+            padding: 12px 16px;
+            box-sizing: border-box;
             position: fixed;
-            bottom: 60px;
-            right: 16px;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-weight: bold;
+            color: #583e1b;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .info-button {
             background: #583e1b;
             color: #ffca3a;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             font-weight: bold;
             font-family: Arial Black, Arial, sans-serif;
             font-size: 1rem;
@@ -89,11 +93,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 200;
+            flex-shrink: 0;
         }
+
         .info-tooltip {
             position: fixed;
-            bottom: 100px;
+            bottom: 60px;
             right: 16px;
             background: #fff;
             color: #583e1b;
@@ -118,63 +123,73 @@
         </div>
         <div class="no-interaction">
             <a class="weatherwidget-io"
-                href="https://forecast7.com/fr/49d416d24/cattenom/"
-                data-font="Arial Black"
-                data-icons="Climacons Animated"
-                data-mode="Current"
-                data-days="3"
-                data-theme="orange">
+               href="https://forecast7.com/fr/49d416d24/cattenom/"
+               data-font="Arial Black"
+               data-icons="Climacons Animated"
+               data-mode="Current"
+               data-days="3"
+               data-theme="orange">
             </a>
         </div>
     </div>
 
     <div class="spacer-footer"></div>
+
+    <!-- Footer avec bouton info -->
     <div class="footer">
-        Made with &lt;3 by Vicdst in Garche 🇫🇷
+        <div class="footer-content">
+            <span>Made with &lt;3 by Vicdst in Garche 🇫🇷</span>
+            <div class="info-button" id="info-button">i</div>
+        </div>
     </div>
 
-    <!-- Info Button -->
-    <div class="info-button" id="info-button">i</div>
+    <!-- Infobulle -->
     <div class="info-tooltip" id="info-tooltip">
         Les données météo sont issues d'une station installée, développée et maintenue à Garche par Vicdst.
     </div>
 
     <script>
-    // Calcul de l'heure arrondie au multiple de 5 minutes inférieur
-    function getRoundedTime() {
-        const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const roundedMinutes = Math.floor(minutes / 5) * 5;
-        const hStr = hours.toString().padStart(2, '0');
-        const mStr = roundedMinutes.toString().padStart(2, '0');
-        return hStr + ':' + mStr;
-    }
-
-    // Affichage dynamique de l'heure
-    function updateMeteoTitle() {
-        document.getElementById('meteo-title').textContent = 'Météo à Garche à ' + getRoundedTime();
-    }
-    updateMeteoTitle();
-    setInterval(updateMeteoTitle, 60 * 1000);
-
-    // Widget météo
-    !function(d,s,id){
-        var js,fjs=d.getElementsByTagName(s)[0];
-        if(!d.getElementById(id)){
-            js=d.createElement(s);
-            js.id=id;
-            js.src='https://weatherwidget.io/js/widget.min.js';
-            fjs.parentNode.insertBefore(js,fjs);
+        // Heure arrondie
+        function getRoundedTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const roundedMinutes = Math.floor(minutes / 5) * 5;
+            return hours.toString().padStart(2, '0') + ':' + roundedMinutes.toString().padStart(2, '0');
         }
-    }(document,'script','weatherwidget-io-js');
 
-    // Info Tooltip Toggle
-    const infoButton = document.getElementById('info-button');
-    const infoTooltip = document.getElementById('info-tooltip');
-    infoButton.addEventListener('click', () => {
-        infoTooltip.classList.toggle('active');
-    });
+        function updateMeteoTitle() {
+            document.getElementById('meteo-title').textContent = 'Météo à Garche à ' + getRoundedTime();
+        }
+
+        updateMeteoTitle();
+        setInterval(updateMeteoTitle, 60000);
+
+        // Widget météo
+        !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0];
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src='https://weatherwidget.io/js/widget.min.js';
+                fjs.parentNode.insertBefore(js,fjs);
+            }
+        }(document,'script','weatherwidget-io-js');
+
+        // Gestion de l’infobulle
+        const infoButton = document.getElementById('info-button');
+        const infoTooltip = document.getElementById('info-tooltip');
+
+        infoButton.addEventListener('click', () => {
+            infoTooltip.classList.toggle('active');
+        });
+
+        // Clic hors de l’infobulle pour la fermer
+        document.addEventListener('click', (e) => {
+            if (!infoButton.contains(e.target) && !infoTooltip.contains(e.target)) {
+                infoTooltip.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
