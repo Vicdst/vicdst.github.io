@@ -1,24 +1,116 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="1; url=http://polograndest.fr">
-  <title>Redirection...</title>
-  <style>
-    body {
-      background-color: #000;
-      color: #000; /* Texte caché */
-      font-family: Arial, sans-serif;
-    }
-    .hidden-text {
-      color: white;
-      user-select: text;
-    }
-  </style>
-</head>
-<body>
-  <p class="hidden-text">
-    Un petit chat gris, prénommé Pistache, vivait au 12e étage d’un immeuble. Chaque matin, il appuyait avec sa patte sur le bouton de l’ascenseur. Les voisins n’en croyaient pas leurs yeux, mais Pistache, stoïque, montait jusqu’au dernier étage comme un vrai citadin. Un jour, l’ascenseur s’arrêta au 8e, et un pigeon entra. Le chat et l’oiseau se fixèrent, silencieusement. Depuis, ils prennent l’ascenseur ensemble tous les matins.
-  </p>
-</body>
+<!--
+  Thanks for viewing my source code. I hope you learn something!
+  Feel free to leave a comment if you see this: https://neocities.org/site/misterdizzy
+-->
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>VicDst</title>
+      <meta name="author" content="VicDst">
+      <meta property="og:title" content="VicDst">
+      <meta property="og:image" content="https://misterdizzy.neocities.org/globe.png">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="referrer" content="no-referrer-when-downgrade">
+      <meta name="robots" content="index, follow">
+      <link rel="stylesheet" href="https://misterdizzy.neocities.org/style.css">
+      <link rel="shortcut icon" type="image/png" href="https://misterdizzy.neocities.org/globe.png">
+      <link rel="author" href="https://misterdizzy.neocities.org/humans.txt">
+      <style>
+          #tower-container {
+            display: block;
+            text-align: center;
+          }
+          #tower {
+            display: inline-block;
+            text-align: left;
+          }
+          #globe {
+            font-size: 36pt;
+            text-align: center;
+          }
+          audio {
+            margin: 0 auto;
+            display: block;
+          }
+
+          /* Modification pour rendre le texte "About MOI" plus lisible */
+          #about .linksmal {
+            font-size: 18pt;      /* Texte plus grand */
+            line-height: 1.8;     /* Espacement entre les lignes */
+            margin-top: 10px;
+            margin-bottom: 10px;
+          }
+      </style>
+  </head>
+  <body class="tan-background brown">
+    <div id="egg">Blud aime coder mais n'a pas le temps</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p id="globe"></p>
+          <h1 class="orange">[ VicDst ]</h1>
+          <h3>Je suis un dev français qui aime bidouiller &#127467;&#127479;</h3>
+          <nav>
+          </nav>
+        </div>
+      </div>
+      <div class="row brown-background tan" id="about">
+        <div class="col">
+          <h1 class="orange">About MOI</h1>
+          <div class="linksmal">
+            Bonjour, je suis un jeune dev français passionné depuis toujours par tout ce qui touche à un ordinateur. Dès que j'ai pu, j'ai immédiatement commencé à coder (merci papa). J'ai commencé par Swift et, dès que je me suis rendu compte que c'était tout pourri, je me suis tourné vers Python, HTML puis Js (surtout pas CSS), et enfin les infrastructures réseau et serveurs. Donc si vous avez besoin d'aide, demandez-moi (je ne répondrai pas). Et enfin, j'aimerais dire : vive Filibert, qui restera à jamais perché en haut de tout ça.  
+            <br><br>[ <a href="#">Vers l'infini et l'au-delà</a> ]
+          </div>
+
+          <div id="tower-container">
+            <pre id="tower">
+                 ^
+                / \
+         /\    / _ \
+        /  \  |_/ \_|
+       /__/\\ |_____|
+      |______| /  /
+       \    / /  /
+        |  | /  /
+       /  / /  /
+      |  | /  /
+      |  |/  / 
+      |  |  /
+      |  _  |
+      | |_| |
+      |  _  |
+      |_|.|_|
+     /_______\
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      (c) 2023 - <span id="currentYear"></span> VicDst
+    </footer>
+
+    <div id="modal-shadow" class="visually-hidden hidden"></div>
+    <div id="modal" class="visually-hidden hidden">
+      <div id="modal-close">
+        <svg id="modal-close-button" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewbox="0 0 14 14" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976311 12.6834 -0.0976311 12.2929 0.292893L7 5.58579L1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L5.58579 7L0.292893 12.2929C-0.0976311 12.6834 -0.0976311 13.3166 0.292893 13.7071C0.683417 14.0976 1.31658 14.0976 1.70711 13.7071L7 8.41421L12.2929 13.7071C12.6834 14.0976 13.3166 14.0976 13.7071 13.7071C14.0976 13.3166 14.0976 12.6834 13.7071 12.2929L8.41421 7L13.7071 1.70711Z" fill="black"/>
+        </svg>
+      </div>
+      <h2 id="modal-title" class="orange">VicDst</h2>
+      <div class="centered">
+        <img src="https://misterdizzy.neocities.org/pixelart/md.png" alt="MD.">
+        <img src="https://misterdizzy.neocities.org/pixelart/8831.png" alt="Mister Dizzy."><br>
+        <img src="https://misterdizzy.neocities.org/projects/buttons/8831-sitestyle.png" alt="[MD]">
+      </div>
+    </div>
+
+    <script src="https://misterdizzy.neocities.org/js/globe.js?u=lol"></script>
+    <script src="https://misterdizzy.neocities.org/js/thumbnail.js?u=lol"></script>
+    <script src="https://misterdizzy.neocities.org/js/currentYear.js"></script>
+    <script src="https://misterdizzy.neocities.org/js/masthead.js"></script>
+    <script src="https://misterdizzy.neocities.org/js/changelog.js"></script>
+  </body>
 </html>
